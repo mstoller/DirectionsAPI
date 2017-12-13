@@ -1,0 +1,10 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# api keys 
+# details here http://www.goingserverless.com/blog/keeping-secrets-out-of-git
+secrets.yml

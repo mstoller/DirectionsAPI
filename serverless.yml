@@ -1,0 +1,25 @@
+service: directions-api
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment:
+    API_KEY: "${self:custom.secrets.API_KEY}"
+package:
+  exclude:
+    - secrets.yml
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  secrets: ${file(secrets.yml):${self:custom.stage}}
+functions:
+  directions:
+    handler: handler.directions
+    events:
+      - http:
+          path: ips/{from}/{to}
+          method: get
+          cors: enabled
+          request:
+            parameters:
+              paths:
+                from: true
+                to: true
